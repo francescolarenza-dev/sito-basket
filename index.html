@@ -1,9 +1,13 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Basket Lombardia - Classifiche Ufficiali</title>
+
+<title>Basket Lombardia LIVE</title>
+<meta name="description" content="Classifiche e risultati live basket Lombardia">
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
@@ -11,249 +15,303 @@
   --bg1:#0b1020;
   --bg2:#1e3a8a;
   --accent:#f97316;
-  --accent2:#9333ea;
+  --live:#22c55e;
   --card:rgba(255,255,255,0.08);
-  --card2:rgba(255,255,255,0.12);
-  --text:#ffffff;
+  --text:#fff;
 }
 
 *{box-sizing:border-box;}
 
-body {
-  font-family:'Poppins', sans-serif;
+body{
+  font-family:Poppins;
   margin:0;
   color:var(--text);
-  background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--accent2));
-  min-height:100vh;
+  background:linear-gradient(135deg,var(--bg1),var(--bg2));
 }
 
-header {
-  background:rgba(0,0,0,0.35);
-  padding:25px;
+/* HEADER */
+header{
   text-align:center;
-  backdrop-filter: blur(12px);
+  padding:20px;
+  background:rgba(0,0,0,0.6);
   position:sticky;
   top:0;
-  z-index:1000;
-  animation:fadeDown 0.8s ease;
 }
 
-header h1{margin:0; font-size:28px;}
-header p{margin:5px 0 0; opacity:0.8;}
-
-nav {
+/* NAV */
+nav{
   display:flex;
   justify-content:center;
-  gap:15px;
-  margin:15px;
-  flex-wrap:wrap;
-  animation:fadeIn 1s ease;
+  gap:10px;
+  margin:10px;
 }
 
-nav a {
+nav a{
   color:white;
   text-decoration:none;
-  font-weight:500;
+  padding:8px 14px;
   background:var(--card);
-  padding:10px 16px;
-  border-radius:999px;
-  transition:0.3s;
-  border:1px solid rgba(255,255,255,0.1);
+  border-radius:20px;
 }
 
-nav a:hover {
-  background:var(--card2);
-  transform:scale(1.08);
+nav a.active{
+  background:var(--accent);
 }
 
-section {
-  padding:20px;
-}
-
-.region-title {
+/* SEARCH */
+.search-box{
   text-align:center;
-  font-size:32px;
-  margin:30px 0;
-  animation:fadeUp 0.8s ease;
+  margin:15px;
 }
 
-h2 {
-  text-align:center;
-  margin-top:40px;
-  color:#ffd7b3;
-  animation:fadeUp 0.8s ease;
+.search-box input{
+  padding:8px;
+  border-radius:6px;
+  border:none;
 }
 
-.table-container {
+/* LIVE */
+.live-box{
+  max-width:900px;
+  margin:20px auto;
+  background:var(--card);
+  padding:15px;
+  border-radius:10px;
+}
+
+.live-match{
+  display:flex;
+  justify-content:space-between;
+  padding:8px;
+}
+
+.live{
+  color:var(--live);
+  font-weight:bold;
+}
+
+/* TABLE */
+.table-container{
   overflow-x:auto;
-  margin:15px auto;
-  max-width:1000px;
-  animation:fadeUp 0.9s ease;
+  margin:20px;
 }
 
-table {
+table{
   width:100%;
   border-collapse:collapse;
   background:var(--card);
-  border-radius:15px;
-  overflow:hidden;
-  backdrop-filter: blur(10px);
-  box-shadow:0 10px 25px rgba(0,0,0,0.25);
-  transition:0.3s;
 }
 
-table:hover {
-  transform:scale(1.01);
-}
-
-th, td {
-  padding:12px;
+th,td{
+  padding:10px;
   text-align:center;
+  white-space:nowrap;
 }
 
-th {
-  background:rgba(255,255,255,0.15);
-  font-weight:600;
+th{
+  cursor:pointer;
 }
 
-tr {
-  transition:0.2s;
-}
-
-tr:hover {
-  background:rgba(255,255,255,0.12);
-}
-
-tr:nth-child(even) {
+tr:nth-child(even){
   background:rgba(255,255,255,0.05);
 }
 
-/* Animazioni */
-@keyframes fadeIn {
-  from {opacity:0;}
-  to {opacity:1;}
+tr:first-child{
+  background:rgba(249,115,22,0.3);
+  font-weight:bold;
 }
 
-@keyframes fadeUp {
-  from {opacity:0; transform:translateY(20px);}
-  to {opacity:1; transform:translateY(0);}
+/* TITOLI */
+h2{
+  text-align:center;
+  margin-top:40px;
 }
-
-@keyframes fadeDown {
-  from {opacity:0; transform:translateY(-20px);}
-  to {opacity:1; transform:translateY(0);}
-}
-
-/* Scroll reveal */
-.hidden {
-  opacity:0;
-  transform:translateY(30px);
-  transition:all 0.6s ease;
-}
-
-.show {
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* Responsive */
-@media (max-width:768px){
-  header h1{font-size:22px;}
-  nav a{padding:8px 12px; font-size:14px;}
-  table{font-size:13px;}
-}
-
 </style>
 </head>
+
 <body>
 
 <header>
-<h1>🏀 Basket Lombardia</h1>
-<p>Classifiche ufficiali aggiornate</p>
+<h1>🏀 Basket Lombardia LIVE</h1>
+<p>Classifiche e risultati in diretta</p>
 </header>
 
 <nav>
-<a href="#lombardia">Classifiche</a>
-<a href="#altre">Squadre</a>
+<a href="#live">Live</a>
+<a href="#classifiche">Classifiche</a>
+<a href="#squadre">Squadre</a>
 </nav>
 
-<section id="lombardia" class="hidden">
-<h1 class="region-title">Campionati Lombardia</h1>
+<div class="search-box">
+<input type="text" id="search" placeholder="Cerca squadra...">
+</div>
+
+<!-- LIVE -->
+<section id="live">
+<div class="live-box">
+<h2>🔴 Partite Live</h2>
+
+<div class="live-match">
+<span data-teamA="Brescia Lions" data-teamB="Milano Tre">
+Brescia Lions vs Milano Tre
+</span>
+<span id="live1" class="live">52 - 49</span>
+</div>
+
+<div class="live-match">
+<span data-teamA="Varese Academy" data-teamB="Como Basket">
+Varese Academy vs Como Basket
+</span>
+<span id="live2" class="live">61 - 60</span>
+</div>
+
+</div>
+</section>
+
+<!-- CLASSIFICHE -->
+<section id="classifiche">
 
 <h2>Serie C</h2>
 <div class="table-container">
 <table>
-<tr><th>#</th><th>Squadra</th><th>Punti</th><th>V</th><th>S</th></tr>
-<tr><td>1</td><td>Bergamo Basket</td><td>48</td><td>24</td><td>4</td></tr>
-<tr><td>2</td><td>Varese Academy</td><td>44</td><td>22</td><td>6</td></tr>
-<tr><td>3</td><td>Milano Tre</td><td>40</td><td>20</td><td>8</td></tr>
-<tr><td>4</td><td>Brescia Lions</td><td>38</td><td>19</td><td>9</td></tr>
-<tr><td>5</td><td>Cremona Stars</td><td>36</td><td>18</td><td>10</td></tr>
-<tr><td>6</td><td>Como Basket</td><td>34</td><td>17</td><td>11</td></tr>
+<tr><th>#</th><th>Squadra</th><th>Punti</th></tr>
+<tr><td>1</td><td>Bergamo Basket</td><td id="Bergamo Basket">48</td></tr>
+<tr><td>2</td><td>Varese Academy</td><td id="Varese Academy">44</td></tr>
+<tr><td>3</td><td>Milano Tre</td><td id="Milano Tre">40</td></tr>
+<tr><td>4</td><td>Brescia Lions</td><td id="Brescia Lions">38</td></tr>
+<tr><td>5</td><td>Como Basket</td><td id="Como Basket">34</td></tr>
 </table>
 </div>
 
 <h2>Divisione Regionale 1</h2>
 <div class="table-container">
 <table>
-<tr><th>#</th><th>Squadra</th><th>Punti</th><th>V</th><th>S</th></tr>
-<tr><td>1</td><td>Gilbertina</td><td>42</td><td>21</td><td>7</td></tr>
-<tr><td>2</td><td>Orzinuovi</td><td>38</td><td>19</td><td>9</td></tr>
-<tr><td>3</td><td>Gussola</td><td>38</td><td>19</td><td>9</td></tr>
-<tr><td>4</td><td>Desio Basket</td><td>36</td><td>18</td><td>10</td></tr>
-<tr><td>5</td><td>Lecco Basket</td><td>34</td><td>17</td><td>11</td></tr>
-<tr><td>6</td><td>Pavia Sharks</td><td>32</td><td>16</td><td>12</td></tr>
+<tr><th>#</th><th>Squadra</th><th>Punti</th></tr>
+<tr><td>1</td><td>Gilbertina</td><td>42</td></tr>
+<tr><td>2</td><td>Orzinuovi</td><td>38</td></tr>
+<tr><td>3</td><td>Desio Basket</td><td>36</td></tr>
+<tr><td>4</td><td>Pavia Sharks</td><td>32</td></tr>
 </table>
 </div>
+
+<!-- UNDER (8 squadre ciascuno) -->
 
 <h2>Under 19</h2>
 <div class="table-container">
 <table>
-<tr><th>#</th><th>Squadra</th><th>Punti</th><th>V</th><th>S</th></tr>
-<tr><td>1</td><td>Olimpia Milano U19</td><td>50</td><td>25</td><td>1</td></tr>
-<tr><td>2</td><td>Cremona U19</td><td>46</td><td>23</td><td>3</td></tr>
-<tr><td>3</td><td>Brescia U19</td><td>42</td><td>21</td><td>5</td></tr>
-<tr><td>4</td><td>Varese U19</td><td>40</td><td>20</td><td>6</td></tr>
-<tr><td>5</td><td>Cantù U19</td><td>38</td><td>19</td><td>7</td></tr>
-<tr><td>6</td><td>Bergamo U19</td><td>36</td><td>18</td><td>8</td></tr>
+<tr><th>#</th><th>Squadra</th><th>Punti</th></tr>
+<tr><td>1</td><td>Olimpia Milano U19</td><td>50</td></tr>
+<tr><td>2</td><td>Cremona U19</td><td>46</td></tr>
+<tr><td>3</td><td>Brescia U19</td><td>42</td></tr>
+<tr><td>4</td><td>Varese U19</td><td>40</td></tr>
+<tr><td>5</td><td>Cantù U19</td><td>38</td></tr>
+<tr><td>6</td><td>Bergamo U19</td><td>36</td></tr>
+<tr><td>7</td><td>Pavia U19</td><td>34</td></tr>
+<tr><td>8</td><td>Lecco U19</td><td>32</td></tr>
 </table>
 </div>
 
-</section>
-
-<section id="altre" class="hidden">
-<h1 class="region-title">Squadre Lombardia</h1>
-
-<h2>Club principali</h2>
+<h2>Under 17</h2>
 <div class="table-container">
 <table>
-<tr><th>Squadra</th><th>Città</th></tr>
-<tr><td>Olimpia Milano</td><td>Milano</td></tr>
-<tr><td>Pallacanestro Brescia</td><td>Brescia</td></tr>
-<tr><td>Pallacanestro Cantù</td><td>Cantù</td></tr>
-<tr><td>Vanoli Cremona</td><td>Cremona</td></tr>
-<tr><td>Varese Basket</td><td>Varese</td></tr>
-<tr><td>Lecco Basket</td><td>Lecco</td></tr>
-<tr><td>Pavia Basket</td><td>Pavia</td></tr>
+<tr><th>#</th><th>Squadra</th><th>Punti</th></tr>
+<tr><td>1</td><td>Milano U17</td><td>48</td></tr>
+<tr><td>2</td><td>Brescia U17</td><td>44</td></tr>
+<tr><td>3</td><td>Varese U17</td><td>42</td></tr>
+<tr><td>4</td><td>Cremona U17</td><td>40</td></tr>
+<tr><td>5</td><td>Cantù U17</td><td>38</td></tr>
+<tr><td>6</td><td>Desio U17</td><td>36</td></tr>
+<tr><td>7</td><td>Pavia U17</td><td>34</td></tr>
+<tr><td>8</td><td>Como U17</td><td>32</td></tr>
+</table>
+</div>
+
+<h2>Under 15</h2>
+<div class="table-container">
+<table>
+<tr><th>#</th><th>Squadra</th><th>Punti</th></tr>
+<tr><td>1</td><td>Varese U15</td><td>42</td></tr>
+<tr><td>2</td><td>Cantù U15</td><td>40</td></tr>
+<tr><td>3</td><td>Milano U15</td><td>38</td></tr>
+<tr><td>4</td><td>Brescia U15</td><td>36</td></tr>
+<tr><td>5</td><td>Cremona U15</td><td>34</td></tr>
+<tr><td>6</td><td>Lecco U15</td><td>32</td></tr>
+<tr><td>7</td><td>Pavia U15</td><td>30</td></tr>
+<tr><td>8</td><td>Como U15</td><td>28</td></tr>
+</table>
+</div>
+
+<h2>Under 14</h2>
+<div class="table-container">
+<table>
+<tr><th>#</th><th>Squadra</th><th>Punti</th></tr>
+<tr><td>1</td><td>Bergamo U14</td><td>38</td></tr>
+<tr><td>2</td><td>Lecco U14</td><td>36</td></tr>
+<tr><td>3</td><td>Milano U14</td><td>34</td></tr>
+<tr><td>4</td><td>Brescia U14</td><td>32</td></tr>
+<tr><td>5</td><td>Varese U14</td><td>30</td></tr>
+<tr><td>6</td><td>Cremona U14</td><td>28</td></tr>
+<tr><td>7</td><td>Cantù U14</td><td>26</td></tr>
+<tr><td>8</td><td>Pavia U14</td><td>24</td></tr>
 </table>
 </div>
 
 </section>
 
 <script>
-// Scroll animation
-const elements=document.querySelectorAll('.hidden');
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add('show');
-    }
-  });
+// MENU ATTIVO
+document.querySelectorAll("nav a").forEach(link=>{
+  link.onclick=()=>{
+    document.querySelectorAll("nav a").forEach(l=>l.classList.remove("active"));
+    link.classList.add("active");
+  };
 });
 
-elements.forEach(el=>observer.observe(el));
+// LIVE + CLASSIFICA
+let lastResults={};
+
+function updateLive(){
+  document.querySelectorAll(".live-match").forEach((match,i)=>{
+    let scoreEl=document.getElementById("live"+(i+1));
+    let [a,b]=scoreEl.innerText.split(" - ").map(Number);
+
+    Math.random()>0.5?a++:b++;
+    scoreEl.innerText=a+" - "+b;
+
+    let span=match.querySelector("span");
+    let A=span.dataset.teamA;
+    let B=span.dataset.teamB;
+
+    let key=A+"-"+B;
+
+    if(!lastResults[key]) lastResults[key]={a:0,b:0};
+
+    let prev=lastResults[key];
+
+    if((prev.a>prev.b && b>a)||(prev.b>prev.a && a>b)){
+      let cellA=document.getElementById(A);
+      let cellB=document.getElementById(B);
+
+      if(cellA && cellB){
+        if(a>b) cellA.innerText=parseInt(cellA.innerText)+2;
+        else cellB.innerText=parseInt(cellB.innerText)+2;
+      }
+    }
+
+    lastResults[key]={a,b};
+  });
+}
+
+setInterval(updateLive,3000);
+
+// SEARCH
+document.getElementById("search").onkeyup=function(){
+  let v=this.value.toLowerCase();
+  document.querySelectorAll("#teamsTable tr").forEach(r=>{
+    r.style.display=r.innerText.toLowerCase().includes(v)?"":"none";
+  });
+};
 </script>
 
 </body>
 </html>
-
