@@ -6,91 +6,130 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Basket Lombardia LIVE</title>
-<meta name="description" content="Classifiche e risultati live basket Lombardia">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
+
+/* =========================
+   🎨 TEMA CHIARO
+========================= */
 :root{
-  --bg1:#0b1020;
-  --bg2:#1e3a8a;
-  --accent:#f97316;
-  --live:#22c55e;
-  --card:rgba(255,255,255,0.08);
-  --text:#fff;
+  --bg:#ffffff;        /* sfondo bianco */
+  --text:#111111;      /* testo scuro */
+
+  --orange:#ff7a00;    /* arancione */
+  --yellow:#ffd000;    /* giallo */
+
+  --card:#f4f4f4;      /* card leggere */
 }
 
-*{box-sizing:border-box;}
+/* =========================
+   BASE
+========================= */
+*{
+  box-sizing:border-box;
+}
 
 body{
-  font-family:Poppins;
   margin:0;
+  font-family:Poppins;
+  background:var(--bg);
   color:var(--text);
-  background:linear-gradient(135deg,var(--bg1),var(--bg2));
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 header{
   text-align:center;
   padding:20px;
-  background:rgba(0,0,0,0.6);
+  background:var(--card);
   position:sticky;
   top:0;
 }
 
-/* NAV */
+header h1{
+  margin:0;
+  color:var(--orange);
+}
+
+header p{
+  margin:5px 0 0;
+}
+
+/* =========================
+   NAV
+========================= */
 nav{
   display:flex;
   justify-content:center;
   gap:10px;
+  flex-wrap:wrap;
   margin:10px;
 }
 
 nav a{
-  color:white;
   text-decoration:none;
-  padding:8px 14px;
+  color:var(--text);
   background:var(--card);
+  padding:8px 14px;
   border-radius:20px;
+  transition:0.2s;
 }
 
-nav a.active{
-  background:var(--accent);
+nav a:hover{
+  background:var(--orange);
+  color:white;
 }
 
-/* SEARCH */
+/* =========================
+   SEARCH
+========================= */
 .search-box{
   text-align:center;
   margin:15px;
 }
 
 .search-box input{
-  padding:8px;
-  border-radius:6px;
-  border:none;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #ddd;
+  width:220px;
 }
 
-/* LIVE */
+/* =========================
+   LIVE
+========================= */
 .live-box{
   max-width:900px;
   margin:20px auto;
   background:var(--card);
   padding:15px;
-  border-radius:10px;
+  border-radius:12px;
 }
 
 .live-match{
   display:flex;
   justify-content:space-between;
-  padding:8px;
+  padding:10px;
 }
 
 .live{
-  color:var(--live);
+  color:var(--yellow);
   font-weight:bold;
+  animation:pulse 1.5s infinite;
 }
 
-/* TABLE */
+@keyframes pulse{
+  0%{opacity:1;}
+  50%{opacity:0.4;}
+  100%{opacity:1;}
+}
+
+/* =========================
+   TABLE
+========================= */
 .table-container{
   overflow-x:auto;
   margin:20px;
@@ -100,31 +139,42 @@ table{
   width:100%;
   border-collapse:collapse;
   background:var(--card);
+  border-radius:12px;
+  overflow:hidden;
 }
 
 th,td{
   padding:10px;
   text-align:center;
-  white-space:nowrap;
 }
 
 th{
-  cursor:pointer;
+  background:var(--orange);
+  color:white;
 }
 
 tr:nth-child(even){
-  background:rgba(255,255,255,0.05);
+  background:#fafafa;
 }
 
-tr:first-child{
-  background:rgba(249,115,22,0.3);
-  font-weight:bold;
+tr:hover{
+  background:#ffe7c2;
 }
 
-/* TITOLI */
+/* =========================
+   TITOLI
+========================= */
 h2{
   text-align:center;
   margin-top:40px;
+  color:var(--orange);
+}
+
+/* =========================
+   UX
+========================= */
+html{
+  scroll-behavior:smooth;
 }
 </style>
 </head>
@@ -139,62 +189,58 @@ h2{
 <nav>
 <a href="#live">Live</a>
 <a href="#classifiche">Classifiche</a>
-<a href="#squadre">Squadre</a>
+<a href="#under">Under</a>
 </nav>
 
 <div class="search-box">
 <input type="text" id="search" placeholder="Cerca squadra...">
 </div>
 
-<!-- LIVE -->
+<!-- =========================
+     LIVE
+========================= -->
 <section id="live">
+
 <div class="live-box">
 <h2>🔴 Partite Live</h2>
 
 <div class="live-match">
-<span data-teamA="Brescia Lions" data-teamB="Milano Tre">
-Brescia Lions vs Milano Tre
-</span>
+<span data-teamA="Brescia Lions" data-teamB="Milano Tre">Brescia Lions vs Milano Tre</span>
 <span id="live1" class="live">52 - 49</span>
 </div>
 
 <div class="live-match">
-<span data-teamA="Varese Academy" data-teamB="Como Basket">
-Varese Academy vs Como Basket
-</span>
+<span data-teamA="Varese Academy" data-teamB="Como Basket">Varese Academy vs Como Basket</span>
 <span id="live2" class="live">61 - 60</span>
 </div>
 
 </div>
 </section>
 
-<!-- CLASSIFICHE -->
+<!-- =========================
+     CLASSIFICHE
+========================= -->
 <section id="classifiche">
 
 <h2>Serie C</h2>
+
 <div class="table-container">
 <table>
 <tr><th>#</th><th>Squadra</th><th>Punti</th></tr>
-<tr><td>1</td><td>Bergamo Basket</td><td id="Bergamo Basket">48</td></tr>
-<tr><td>2</td><td>Varese Academy</td><td id="Varese Academy">44</td></tr>
-<tr><td>3</td><td>Milano Tre</td><td id="Milano Tre">40</td></tr>
-<tr><td>4</td><td>Brescia Lions</td><td id="Brescia Lions">38</td></tr>
-<tr><td>5</td><td>Como Basket</td><td id="Como Basket">34</td></tr>
+<tr><td>1</td><td>Bergamo Basket</td><td>48</td></tr>
+<tr><td>2</td><td>Varese Academy</td><td>44</td></tr>
+<tr><td>3</td><td>Milano Tre</td><td>40</td></tr>
+<tr><td>4</td><td>Brescia Lions</td><td>38</td></tr>
+<tr><td>5</td><td>Como Basket</td><td>34</td></tr>
 </table>
 </div>
 
-<h2>Divisione Regionale 1</h2>
-<div class="table-container">
-<table>
-<tr><th>#</th><th>Squadra</th><th>Punti</th></tr>
-<tr><td>1</td><td>Gilbertina</td><td>42</td></tr>
-<tr><td>2</td><td>Orzinuovi</td><td>38</td></tr>
-<tr><td>3</td><td>Desio Basket</td><td>36</td></tr>
-<tr><td>4</td><td>Pavia Sharks</td><td>32</td></tr>
-</table>
-</div>
+</section>
 
-<!-- UNDER (8 squadre ciascuno) -->
+<!-- =========================
+     UNDER
+========================= -->
+<section id="under">
 
 <h2>Under 19</h2>
 <div class="table-container">
@@ -202,12 +248,12 @@ Varese Academy vs Como Basket
 <tr><th>#</th><th>Squadra</th><th>Punti</th></tr>
 <tr><td>1</td><td>Olimpia Milano U19</td><td>50</td></tr>
 <tr><td>2</td><td>Cremona U19</td><td>46</td></tr>
-<tr><td>3</td><td>Brescia U19</td><td>42</td></tr>
-<tr><td>4</td><td>Varese U19</td><td>40</td></tr>
-<tr><td>5</td><td>Cantù U19</td><td>38</td></tr>
-<tr><td>6</td><td>Bergamo U19</td><td>36</td></tr>
-<tr><td>7</td><td>Pavia U19</td><td>34</td></tr>
-<tr><td>8</td><td>Lecco U19</td><td>32</td></tr>
+<tr><td>3</td><td>Brescia U19</td><td>44</td></tr>
+<tr><td>4</td><td>Varese U19</td><td>42</td></tr>
+<tr><td>5</td><td>Cantù U19</td><td>40</td></tr>
+<tr><td>6</td><td>Bergamo U19</td><td>38</td></tr>
+<tr><td>7</td><td>Pavia U19</td><td>36</td></tr>
+<tr><td>8</td><td>Lecco U19</td><td>34</td></tr>
 </table>
 </div>
 
@@ -216,13 +262,13 @@ Varese Academy vs Como Basket
 <table>
 <tr><th>#</th><th>Squadra</th><th>Punti</th></tr>
 <tr><td>1</td><td>Milano U17</td><td>48</td></tr>
-<tr><td>2</td><td>Brescia U17</td><td>44</td></tr>
-<tr><td>3</td><td>Varese U17</td><td>42</td></tr>
-<tr><td>4</td><td>Cremona U17</td><td>40</td></tr>
-<tr><td>5</td><td>Cantù U17</td><td>38</td></tr>
-<tr><td>6</td><td>Desio U17</td><td>36</td></tr>
-<tr><td>7</td><td>Pavia U17</td><td>34</td></tr>
-<tr><td>8</td><td>Como U17</td><td>32</td></tr>
+<tr><td>2</td><td>Brescia U17</td><td>46</td></tr>
+<tr><td>3</td><td>Varese U17</td><td>44</td></tr>
+<tr><td>4</td><td>Cremona U17</td><td>42</td></tr>
+<tr><td>5</td><td>Cantù U17</td><td>40</td></tr>
+<tr><td>6</td><td>Desio U17</td><td>38</td></tr>
+<tr><td>7</td><td>Pavia U17</td><td>36</td></tr>
+<tr><td>8</td><td>Como U17</td><td>34</td></tr>
 </table>
 </div>
 
@@ -259,24 +305,18 @@ Varese Academy vs Como Basket
 </section>
 
 <script>
-// MENU ATTIVO
-document.querySelectorAll("nav a").forEach(link=>{
-  link.onclick=()=>{
-    document.querySelectorAll("nav a").forEach(l=>l.classList.remove("active"));
-    link.classList.add("active");
-  };
-});
 
-// LIVE + CLASSIFICA
+/* LIVE SIMULATION */
 let lastResults={};
 
 function updateLive(){
   document.querySelectorAll(".live-match").forEach((match,i)=>{
+
     let scoreEl=document.getElementById("live"+(i+1));
-    let [a,b]=scoreEl.innerText.split(" - ").map(Number);
+    let [a,b]=scoreEl.textContent.split(" - ").map(Number);
 
     Math.random()>0.5?a++:b++;
-    scoreEl.innerText=a+" - "+b;
+    scoreEl.textContent=a+" - "+b;
 
     let span=match.querySelector("span");
     let A=span.dataset.teamA;
@@ -289,12 +329,12 @@ function updateLive(){
     let prev=lastResults[key];
 
     if((prev.a>prev.b && b>a)||(prev.b>prev.a && a>b)){
-      let cellA=document.getElementById(A);
-      let cellB=document.getElementById(B);
+      let cellA=document.getElementById(A.replaceAll(" ","-"));
+      let cellB=document.getElementById(B.replaceAll(" ","-"));
 
       if(cellA && cellB){
-        if(a>b) cellA.innerText=parseInt(cellA.innerText)+2;
-        else cellB.innerText=parseInt(cellB.innerText)+2;
+        if(a>b) cellA.textContent=parseInt(cellA.textContent)+2;
+        else cellB.textContent=parseInt(cellB.textContent)+2;
       }
     }
 
@@ -304,13 +344,14 @@ function updateLive(){
 
 setInterval(updateLive,3000);
 
-// SEARCH
+/* SEARCH */
 document.getElementById("search").onkeyup=function(){
   let v=this.value.toLowerCase();
-  document.querySelectorAll("#teamsTable tr").forEach(r=>{
+  document.querySelectorAll("table tr").forEach(r=>{
     r.style.display=r.innerText.toLowerCase().includes(v)?"":"none";
   });
 };
+
 </script>
 
 </body>
